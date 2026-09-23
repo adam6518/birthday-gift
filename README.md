@@ -1,0 +1,1 @@
+Add photo1.jpg-photo6.jpg to assets/images and video1.mp4-video3.mp4 to assets/videos, then open index.html.

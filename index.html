@@ -1,0 +1,369 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Birthday Adventure 🎀</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <audio id="birthdayMusic" loop>
+      <source
+        src="assets/music/cute-pastel-birthday-instrumental.wav"
+        type="audio/wav"
+      />
+      Your browser does not support audio.
+    </audio>
+    <section id="welcome">
+      <!-- ==========================================
+     BIRTHDAY VERIFICATION OVERLAY
+========================================== -->
+
+      <div id="birthdayGate" class="birthday-gate">
+        <!-- COUNTDOWN -->
+        <div id="countdownScreen" class="countdown-screen">
+          <div class="countdown-decoration">🎀</div>
+
+          <p class="countdown-label">SPECIAL SURPRISE FOR YOU 💗</p>
+
+          <h2>Ciee.. Ga Sabar Yaa ??</h2>
+
+          <p class="countdown-message">Tunggu Jam 00.00 Yaa :P</p>
+
+          <div class="countdown-timer">
+            <div class="countdown-box">
+              <span id="countdownDays">00</span>
+              <small>HARI</small>
+            </div>
+
+            <div class="countdown-separator">:</div>
+
+            <div class="countdown-box">
+              <span id="countdownHours">00</span>
+              <small>JAM</small>
+            </div>
+
+            <div class="countdown-separator">:</div>
+
+            <div class="countdown-box">
+              <span id="countdownMinutes">00</span>
+              <small>MENIT</small>
+            </div>
+
+            <div class="countdown-separator">:</div>
+
+            <div class="countdown-box">
+              <span id="countdownSeconds">00</span>
+              <small>DETIK</small>
+            </div>
+          </div>
+
+          <p class="countdown-footer">Sedikit lagi yaa... 🎂✨</p>
+        </div>
+
+        <!-- FORM VERIFIKASI -->
+        <div id="birthdayFormCard" class="gate-card" hidden>
+          <div class="gate-decoration">🎀</div>
+
+          <p class="gate-label">SELAMAT ULANG TAHUN !!</p>
+
+          <h2>Sebelum Kita Lanjut... 💌</h2>
+
+          <p class="gate-description">
+            Isi Nama dan Umur Kamu yang Bener Ya, Kalau Kamu Bohong, Kita Gak
+            Akan Lanjutin Ke Halaman Selanjutnya :)
+          </p>
+
+          <form id="birthdayForm">
+            <div class="form-group">
+              <label for="fullName"> Nama Lengkap </label>
+
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="Masukkan Nama Lengkap Kamu Yang Bener"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="age"> Umur </label>
+
+              <input
+                type="number"
+                id="age"
+                name="age"
+                placeholder="Masukkan Umur Kamu Yang Bener"
+                required
+              />
+            </div>
+
+            <p id="gateError" class="gate-error" hidden>
+              <span id="gateErrorText"></span>
+            </p>
+
+            <button type="submit" class="gate-button">
+              Buka Surprise Buat Aku !! ✨
+            </button>
+          </form>
+
+          <p class="gate-footer">Semoga Kamu Seneng Yaa 💗</p>
+        </div>
+      </div>
+
+      <small>Kecil - Kecilan Aja Ya, Semoga Kamu Suka :)</small>
+
+      <h1>Hai, Risha 💗 !!</h1>
+
+      <p>Siap Buat Jalan - Jalan ?</p>
+
+      <button onclick="start()">Gasss Kita ke Level 1 Dulu Yaa ✨</button>
+    </section>
+    <main id="app" hidden>
+      <nav class="text-center">
+        <h3>
+          <strong
+            >🎀 Ayo Kita Jalan - Jalan, Jangan Lupa Klik Music Biar Ada Musiknya
+            Dikit Hwhw</strong
+          >
+        </h3>
+        <button onclick="music()">🔊 Music</button>
+      </nav>
+      <section>
+        <small>LEVEL 1</small>
+        <h2>Buat Permohonan Dulu Sebelum Lanjut ke Level 2</h2>
+        <p>Tap 5 Simbol Pilihan Kamu Buat Lanjut ke Level 2.</p>
+        <div id="stars"></div>
+        <p>Wishes: <b id="score">0</b>/5</p>
+        <button id="unlock" disabled onclick="unlock()">
+          Lanjut ke Level 2 🔒
+        </button>
+      </section>
+      <section id="memories" hidden>
+        <small>LEVEL 2</small>
+        <h2>Happy Moments 📸</h2>
+        <div class="gallery">
+          <img src="assets/images/IMG_6566.JPG" onclick="light(this.src)" /><img
+            src="assets/images/IMG_6540.JPG"
+            onclick="light(this.src)"
+          /><img
+            src="assets/images/IMG_6573.JPG"
+            onclick="light(this.src)"
+          /><img
+            src="assets/images/IMG_6571.JPG"
+            onclick="light(this.src)"
+          /><img
+            src="assets/images/IMG_6612.JPG"
+            onclick="light(this.src)"
+          /><img src="assets/images/IMG_6578.JPG" onclick="light(this.src)" />
+        </div>
+        <h2>Berdua 📸</h2>
+        <div class="gallery">
+          <img src="assets/images/IMG_6432.JPG" onclick="light(this.src)" /><img
+            src="assets/images/IMG_6520.JPG"
+            onclick="light(this.src)"
+          /><img
+            src="assets/images/IMG_6507.JPG"
+            onclick="light(this.src)"
+          /><img
+            src="assets/images/IMG_6602.JPG"
+            onclick="light(this.src)"
+          /><img
+            src="assets/images/IMG_6607.JPG"
+            onclick="light(this.src)"
+          /><img
+            src="assets/images/IMG_6667.JPG"
+            onclick="light(this.src)"
+          /><img
+            src="assets/images/IMG_6682.JPG"
+            onclick="light(this.src)"
+          /><img src="assets/images/wa 1.jpeg" onclick="light(this.src)" /><img
+            src="assets/images/wa 2.jpeg"
+            onclick="light(this.src)"
+          /><img src="assets/images/wa 3.jpeg" onclick="light(this.src)" />
+        </div>
+        <button onclick="videos()">Lanjut ke Level 3 🎥</button>
+      </section>
+      <section id="video" hidden>
+        <small>LEVEL 3</small>
+        <h2>Video Memories 🎥</h2>
+        <div class="videos">
+          <video controls src="assets/videos/IMG_6423.mp4"></video>
+          <video
+            controls
+            src="assets/videos/WhatsApp Video 2026-09-23 at 14.27.25.mp4"
+          ></video>
+          <video
+            controls
+            src="assets/videos/8ff61a34a1d749c1bf604e2bed7a7691.mp4"
+          ></video>
+          <video
+            controls
+            src="assets/videos/copy_F744248F-A77B-4C66-A309-6684B6BA4B32.mp4"
+          ></video>
+          <video
+            controls
+            src="assets/videos/WhatsApp Video 2026-09-23 at 16.28.55.mp4"
+          ></video>
+          <video
+            controls
+            src="assets/videos/e43120c1e89a438687a19c1b5158472c.mp4"
+          ></video>
+          <video
+            controls
+            src="assets/videos/FA5A0A23-4FAE-48B0-8998-694CD1F1FB3B.mp4"
+          ></video>
+          <video
+            controls
+            src="assets/videos/b9acf31cf3394480a75abcba06c30e2a.mp4"
+          ></video>
+          <video
+            controls
+            src="assets/videos/copy_95AA7583-3AF4-4D4F-AD3D-B2568655B927.mp4"
+          ></video>
+        </div>
+        <h2>Bonusss 🎥</h2>
+        <div class="videos">
+          <video controls src="assets/videos/20260809_245547094.mp4"></video
+          ><video controls src="assets/videos/20260810_081221774.mp4"></video
+          ><video controls src="assets/videos/20260810_204302608.mp4"></video>
+          <video controls src="assets/videos/20260810_204956893.mp4"></video>
+        </div>
+        <button onclick="mystery()">Lanjut ke Level 4 🎁</button>
+      </section>
+      <section id="mystery" hidden>
+        <small>LEVEL 4</small>
+        <h2>Tebak Salah Satu Box Untuk Munculin Sesuatu</h2>
+        <div class="boxes">
+          <button onclick="box(0)">🎁</button
+          ><button onclick="box(1)">🎁</button
+          ><button onclick="box(2)">🎁</button>
+        </div>
+        <p id="result"></p>
+      </section>
+      <section id="letter" hidden>
+        <div class="birthday-image-wrapper">
+          <img
+            src="assets/images/Screenshot_20260803_001128_WhatsApp-removebg-preview.png"
+            alt="Foto kenangan"
+            class="birthday-image"
+          />
+        </div>
+        <h2>Dari Aku... 💌</h2>
+        <article id="note"></article>
+        <button onclick="celebrate()">Klik Ini Cepettt 🎉</button>
+      </section>
+      <footer>Dibuat Oleh Abang GPT + Aku 💗</footer>
+    </main>
+    <div id="lightbox" hidden onclick="this.hidden = true">
+      <img id="big" />
+    </div>
+    <!-- BEAUTIFUL BIRTHDAY POPUP -->
+    <div id="birthdayModal" class="birthday-modal">
+      <div class="birthday-modal-card">
+        <button class="modal-close" onclick="closeBirthdayModal()">×</button>
+
+        <div class="modal-decoration">✨</div>
+
+        <div class="modal-icon">🎂</div>
+
+        <p class="modal-small-title">Wish dari Aku Nih...</p>
+
+        <h2>Happy 23rd Birthday! 💗</h2>
+
+        <div class="modal-divider">🌸 ───── 💕 ───── 🌸</div>
+
+        <p class="modal-message">
+          Mudah - Mudahan Kamu Dapet Kerja Sesuai Yang Kamu Impikan,
+          Penghasilannya Cukup.
+          <br /><br />
+          Mudah - Mudahan Program Dietnya Bisa Lebih Konsisten Lebih Bagus Lagi,
+          Mix Sama Olahraga Kalo Bisa !!.
+          <br /><br />
+          Semoga Ada Laki - Laki Yang Mengusahakan Kamu Semampu Yang Dia Bisa
+          dan Ketika Dia Dateng Semoga Kamu Bisa Terima Dia
+          <br /><br />
+          Semoga Kamu Bisa Nyenengin Orang Tua, Adek - Adek Kamu dan Diri Kamu
+          Sendiri
+          <br /><br />
+          Semoga Kamu Bisa Tau Apa Yang Kamu Mau dan Yang Kamu Mau Gak Diganggu
+          Oleh Siapapun
+          <br /><br />
+          Semoga Semua Keputusan Yang Kamu Ambil Bener - Bener Berasal dari Hati
+          Kamu Sendiri Tanpa Campur Tangan Orang Lain, Karena Gak Ada Yang Lebih
+          Penting dari Diri Kamu Sendiri
+          <br /><br />
+          Semoga Nanti Hal Apapun Yang Dateng ke Kamu Adalah Hal Baik di Waktu
+          Yang Tepat
+          <br /><br />
+          Aku Doain Semua Yang Terbaik Buat Kamu Supaya Kamu Bisa Bahagia dan
+          Sehat Terus 🎀
+          <br /><br />
+          <br /><br />
+          Udah Segitu Aja Lah Ya, Sisanya Biar Kado dari Aku Aja Yang Bersuara
+          <br /><br />
+          <br /><br />
+          Sampe Ketemu Bulan April 2027 Yaa, Semoga Gak Ada Halangan Untuk
+          Ketemu !!
+        </p>
+
+        <div class="modal-footer-decoration">
+          Dibuat Secara Sadar Tanpa Pengaruh Orang Lain ✨
+        </div>
+
+        <button class="modal-button" onclick="sendWhatsApp()">
+          Jangan Lupa Bilang Makasih Yaa !! 💖
+        </button>
+      </div>
+    </div>
+    <!-- ==========================================
+     WHATSAPP WARNING MODAL
+========================================== -->
+
+    <div id="whatsappWarning" class="whatsapp-warning">
+      <div class="whatsapp-warning-card">
+        <!-- Decorative Elements -->
+        <div class="warning-sparkle sparkle-one">✦</div>
+        <div class="warning-sparkle sparkle-two">✧</div>
+
+        <div class="warning-flower flower-one">🌸</div>
+        <div class="warning-flower flower-two">🌷</div>
+
+        <div class="warning-icon">💌</div>
+
+        <p class="warning-label">SEBELUM KITA LANJUT...</p>
+
+        <h2>Kamu Harus Janji Ya ?? 🎀</h2>
+
+        <div class="warning-divider">🌸 ───── 💗 ───── 🌸</div>
+
+        <p class="warning-message">
+          CHAT YANG NANTI MUNCUL DI WA GABOLEH ADA YANG DIHAPUS YAA KECUALI KAMU
+          MAU NAMBAHIN TRUS LANGSUNG KIRIM CHATNYA.
+          <br /><br />
+          INGET YAA GABOLEH ADA YANG DIKURANGIN KALIMATNYA DAN HARUS KIRIM...
+          <br /><br />
+          AWAS AJA KALO NGELANGGAR AKKWOKWOK 😤💗
+        </p>
+
+        <div class="warning-decoration">Janjiiii ??? 🤙</div>
+
+        <div class="warning-actions">
+          <button class="warning-cancel" onclick="closeWhatsAppWarning()">
+            Bentar, Aku Baca Lagi 🎀
+          </button>
+
+          <button class="warning-confirm" onclick="confirmWhatsApp()">
+            IYAA, AKU KIRIM! 💌
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
