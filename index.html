@@ -19,54 +19,9 @@
       Your browser does not support audio.
     </audio>
     <section id="welcome">
-      <!-- ==========================================
-     BIRTHDAY VERIFICATION OVERLAY
-========================================== -->
-
+      <!-- BIRTHDAY VERIFICATION OVERLAY -->
       <div id="birthdayGate" class="birthday-gate">
-        <!-- COUNTDOWN -->
-        <div id="countdownScreen" class="countdown-screen">
-          <div class="countdown-decoration">🎀</div>
-
-          <p class="countdown-label">SPECIAL SURPRISE FOR YOU 💗</p>
-
-          <h2>Ciee.. Ga Sabar Yaa ??</h2>
-
-          <p class="countdown-message">Tunggu Jam 00.00 Yaa :P</p>
-
-          <div class="countdown-timer">
-            <div class="countdown-box">
-              <span id="countdownDays">00</span>
-              <small>HARI</small>
-            </div>
-
-            <div class="countdown-separator">:</div>
-
-            <div class="countdown-box">
-              <span id="countdownHours">00</span>
-              <small>JAM</small>
-            </div>
-
-            <div class="countdown-separator">:</div>
-
-            <div class="countdown-box">
-              <span id="countdownMinutes">00</span>
-              <small>MENIT</small>
-            </div>
-
-            <div class="countdown-separator">:</div>
-
-            <div class="countdown-box">
-              <span id="countdownSeconds">00</span>
-              <small>DETIK</small>
-            </div>
-          </div>
-
-          <p class="countdown-footer">Sedikit lagi yaa... 🎂✨</p>
-        </div>
-
-        <!-- FORM VERIFIKASI -->
-        <div id="birthdayFormCard" class="gate-card" hidden>
+        <div id="birthdayFormCard" class="gate-card">
           <div class="gate-decoration">🎀</div>
 
           <p class="gate-label">SELAMAT ULANG TAHUN !!</p>
@@ -80,7 +35,7 @@
 
           <form id="birthdayForm">
             <div class="form-group">
-              <label for="fullName"> Nama Lengkap </label>
+              <label for="fullName">Nama Lengkap</label>
 
               <input
                 type="text"
@@ -92,7 +47,7 @@
             </div>
 
             <div class="form-group">
-              <label for="age"> Umur </label>
+              <label for="age">Umur</label>
 
               <input
                 type="number"
@@ -116,13 +71,18 @@
         </div>
       </div>
 
-      <small>Kecil - Kecilan Aja Ya, Semoga Kamu Suka :)</small>
+      <!-- WELCOME CONTENT -->
+      <div class="welcome-content">
+        <small>Kecil - Kecilan Aja Ya, Semoga Kamu Suka :)</small>
 
-      <h1>Hai, Risha 💗 !!</h1>
+        <h1>Hai, Risha 💗 !!</h1>
 
-      <p>Siap Buat Jalan - Jalan ?</p>
+        <p>Siap Buat Jalan - Jalan ?</p>
 
-      <button onclick="start()">Gasss Kita ke Level 1 Dulu Yaa ✨</button>
+        <button type="button" onclick="start()">
+          Gasss Kita ke Level 1 Dulu Yaa ✨
+        </button>
+      </div>
     </section>
     <main id="app" hidden>
       <nav class="text-center">

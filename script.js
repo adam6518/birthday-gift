@@ -1,19 +1,30 @@
 let score = 0;
+let luckyBox = Math.floor(Math.random() * 3);
+let isMusicPlaying = false;
+let lightboxInitialized = false;
 
-// ==========================================
-// START ADVENTURE
-// ==========================================
+/* ==========================================
+   START ADVENTURE
+========================================== */
 
 function start() {
-  document.getElementById("welcome").hidden = true;
-  document.getElementById("app").hidden = false;
+  const welcome = document.getElementById("welcome");
+  const app = document.getElementById("app");
+
+  if (welcome) {
+    welcome.hidden = true;
+  }
+
+  if (app) {
+    app.hidden = false;
+  }
 
   spawnStars();
 }
 
-// ==========================================
-// MINI GAME - COLLECT STARS
-// ==========================================
+/* ==========================================
+   MINI GAME - COLLECT STARS
+========================================== */
 
 function spawnStars() {
   const starZone = document.getElementById("stars");
@@ -25,15 +36,17 @@ function spawnStars() {
   for (let i = 0; i < 12; i++) {
     const star = document.createElement("button");
 
-    star.className = "star";
     star.type = "button";
+    star.className = "star";
     star.textContent = ["✨", "🌸", "💖", "⭐"][i % 4];
 
     star.style.left = Math.random() * 90 + "%";
     star.style.top = Math.random() * 85 + "%";
 
     star.addEventListener("click", function () {
-      if (star.disabled) return;
+      if (star.disabled) {
+        return;
+      }
 
       star.disabled = true;
       star.style.opacity = "0.2";
@@ -60,15 +73,14 @@ function spawnStars() {
   }
 }
 
-// ==========================================
-// UNLOCK MEMORIES
-// ==========================================
+/* ==========================================
+   UNLOCK MEMORIES
+========================================== */
 
 function unlock() {
   const memoriesSection = document.getElementById("memories");
 
   if (!memoriesSection) {
-    console.error("Section memories tidak ditemukan!");
     return;
   }
 
@@ -82,15 +94,14 @@ function unlock() {
   }, 100);
 }
 
-// ==========================================
-// VIDEO SECTION
-// ==========================================
+/* ==========================================
+   VIDEO SECTION
+========================================== */
 
 function videos() {
   const videoSection = document.getElementById("video");
 
   if (!videoSection) {
-    console.error("Section video tidak ditemukan!");
     return;
   }
 
@@ -102,15 +113,14 @@ function videos() {
   });
 }
 
-// ==========================================
-// MYSTERY BOX
-// ==========================================
+/* ==========================================
+   MYSTERY BOX SECTION
+========================================== */
 
 function mystery() {
   const mysterySection = document.getElementById("mystery");
 
   if (!mysterySection) {
-    console.error("Section mystery tidak ditemukan!");
     return;
   }
 
@@ -122,16 +132,16 @@ function mystery() {
   });
 }
 
-// ==========================================
-// RANDOM MYSTERY BOX
-// ==========================================
-
-let luckyBox = Math.floor(Math.random() * 3);
+/* ==========================================
+   RANDOM MYSTERY BOX
+========================================== */
 
 function box(index) {
   const result = document.getElementById("result");
 
-  if (!result) return;
+  if (!result) {
+    return;
+  }
 
   if (index === luckyBox) {
     result.textContent = "You found it! Have a wonderful year ahead 💗";
@@ -172,15 +182,17 @@ Have the loveliest birthday! 💗
   }
 }
 
-// ==========================================
-// BASIC LIGHTBOX FUNCTION
-// ==========================================
+/* ==========================================
+   BASIC LIGHTBOX
+========================================== */
 
 function light(src) {
   const lightbox = document.getElementById("lightbox");
   const big = document.getElementById("big");
 
-  if (!lightbox || !big) return;
+  if (!lightbox || !big) {
+    return;
+  }
 
   big.src = src;
   lightbox.hidden = false;
@@ -188,14 +200,16 @@ function light(src) {
   document.body.classList.add("lightbox-open");
 }
 
-// ==========================================
-// BEAUTIFUL BIRTHDAY CELEBRATION
-// ==========================================
+/* ==========================================
+   BIRTHDAY CELEBRATION
+========================================== */
 
 function celebrate() {
   const modal = document.getElementById("birthdayModal");
 
-  if (!modal) return;
+  if (!modal) {
+    return;
+  }
 
   modal.classList.add("show");
   document.body.style.overflow = "hidden";
@@ -207,30 +221,32 @@ function celebrate() {
   }
 }
 
-// ==========================================
-// CLOSE BIRTHDAY MODAL
-// ==========================================
+/* ==========================================
+   CLOSE BIRTHDAY MODAL
+========================================== */
 
 function closeBirthdayModal() {
   const modal = document.getElementById("birthdayModal");
 
-  if (!modal) return;
+  if (!modal) {
+    return;
+  }
 
   modal.classList.remove("show");
   document.body.style.overflow = "auto";
 }
 
-// ==========================================
-// BACKGROUND MUSIC
-// ==========================================
-
-let isMusicPlaying = false;
+/* ==========================================
+   BACKGROUND MUSIC
+========================================== */
 
 function music() {
   const audio = document.getElementById("birthdayMusic");
   const musicButton = document.querySelector("nav button");
 
-  if (!audio || !musicButton) return;
+  if (!audio || !musicButton) {
+    return;
+  }
 
   if (!isMusicPlaying) {
     audio
@@ -250,51 +266,75 @@ function music() {
   }
 }
 
-// ==========================================
-// BIRTHDAY VERIFICATION
-// ==========================================
+/* ==========================================
+   BIRTHDAY VERIFICATION
+========================================== */
 
-const birthdayForm = document.getElementById("birthdayForm");
-const birthdayGate = document.getElementById("birthdayGate");
-const fullNameInput = document.getElementById("fullName");
-const ageInput = document.getElementById("age");
-const gateError = document.getElementById("gateError");
-const gateErrorText = document.getElementById("gateErrorText");
+document.addEventListener("DOMContentLoaded", () => {
+  const birthdayForm = document.getElementById("birthdayForm");
+  const birthdayGate = document.getElementById("birthdayGate");
+  const fullNameInput = document.getElementById("fullName");
+  const ageInput = document.getElementById("age");
+  const gateError = document.getElementById("gateError");
+  const gateErrorText = document.getElementById("gateErrorText");
 
-// ==========================================
-// FORM SUBMISSION
-// ==========================================
+  if (!birthdayForm) {
+    return;
+  }
 
-if (birthdayForm) {
   birthdayForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const enteredName = fullNameInput.value.trim();
-    const enteredAge = ageInput.value.trim();
+    const enteredName = fullNameInput
+      ? fullNameInput.value.trim().toLowerCase()
+      : "";
 
-    if (
-      enteredName.toLowerCase() !== "risha nur kharisma" ||
-      enteredAge !== "23"
-    ) {
-      showGateError();
+    const enteredAge = ageInput ? ageInput.value.trim() : "";
+
+    if (enteredName !== "risha nur kharisma" || enteredAge !== "23") {
+      showGateError(gateError, gateErrorText);
       return;
     }
 
-    birthdayGate.classList.add("gate-hidden");
+    if (birthdayGate) {
+      birthdayGate.classList.add("gate-hidden");
+    }
+
     document.body.style.overflow = "auto";
   });
-}
 
-// ==========================================
-// SHOW ERROR
-// ==========================================
+  if (fullNameInput) {
+    fullNameInput.addEventListener("input", () => {
+      if (gateError) {
+        gateError.classList.remove("show");
+        gateError.hidden = true;
+      }
+    });
+  }
 
-function showGateError() {
-  if (!gateError || !gateErrorText) return;
+  if (ageInput) {
+    ageInput.addEventListener("input", () => {
+      if (gateError) {
+        gateError.classList.remove("show");
+        gateError.hidden = true;
+      }
+    });
+  }
+});
+
+/* ==========================================
+   SHOW FORM ERROR
+========================================== */
+
+function showGateError(gateError, gateErrorText) {
+  if (!gateError || !gateErrorText) {
+    return;
+  }
 
   gateErrorText.textContent =
     "Kan Udah Aku Bilang Isi Yang Jujur. Kalo Masih Bohong Kita Gak Akan Lanjut Loh";
 
+  gateError.hidden = false;
   gateError.classList.remove("show");
 
   void gateError.offsetWidth;
@@ -312,31 +352,14 @@ function showGateError() {
   }
 }
 
-// ==========================================
-// REMOVE ERROR WHEN USER TYPES
-// ==========================================
-
-if (fullNameInput) {
-  fullNameInput.addEventListener("input", function () {
-    gateError?.classList.remove("show");
-  });
-}
-
-if (ageInput) {
-  ageInput.addEventListener("input", function () {
-    gateError?.classList.remove("show");
-  });
-}
-
-// ==========================================
-// WHATSAPP WARNING MODAL
-// ==========================================
+/* ==========================================
+   WHATSAPP WARNING MODAL
+========================================== */
 
 function sendWhatsApp() {
   const warningModal = document.getElementById("whatsappWarning");
 
   if (!warningModal) {
-    console.error("WhatsApp warning modal tidak ditemukan!");
     return;
   }
 
@@ -344,46 +367,35 @@ function sendWhatsApp() {
   document.body.style.overflow = "hidden";
 }
 
-// ==========================================
-// CLOSE WHATSAPP WARNING
-// ==========================================
-
 function closeWhatsAppWarning() {
   const warningModal = document.getElementById("whatsappWarning");
 
-  if (!warningModal) return;
+  if (!warningModal) {
+    return;
+  }
 
   warningModal.classList.remove("show");
   document.body.style.overflow = "auto";
 }
 
-// ==========================================
-// CONFIRM & OPEN WHATSAPP
-// ==========================================
-
 function confirmWhatsApp() {
   const phoneNumber = "6288808975035";
 
-  const message = `Makasih yaa buat hadiah kecil yang kamu kasih. Makasih juga untuk semua doa nya. Aku tunggu kado dari kamu. Aku ga janji tapi aku pasti usahain supaya April 2027 kita bisa ketemuan tanpa halangan. Maaf juga di tanggal 26 September 2026 nanti kita gabisa ketemu biar kamu hemat uang tabungan merit kamu. Sampe ketemu April 2027 yaa. Sekali lagi, makasih banyak yaa !!`;
+  const message =
+    "Makasih yaa buat hadiah kecil yang kamu kasih. Makasih juga untuk semua doa nya. Aku tunggu kado dari kamu. Aku ga janji tapi aku pasti usahain supaya April 2027 kita bisa ketemuan tanpa halangan. Maaf juga di tanggal 26 September 2026 nanti kita gabisa ketemu biar kamu hemat uang tabungan merit kamu. Sampe ketemu April 2027 yaa. Sekali lagi, makasih banyak yaa !!";
 
-  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-    message,
-  )}`;
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   window.location.href = whatsappURL;
 }
 
-// ==========================================
-// INITIALIZE INTERACTIVE MEMORIES
-// ==========================================
+/* ==========================================
+   INTERACTIVE MEMORIES
+========================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
   setupInteractiveMemories();
 });
-
-// ==========================================
-// SETUP INTERACTIVE MEMORIES
-// ==========================================
 
 function setupInteractiveMemories() {
   const galleries = [...document.querySelectorAll(".gallery")];
@@ -403,19 +415,15 @@ function setupInteractiveMemories() {
   }
 }
 
-// ==========================================
-// PHOTO INTERACTION
-// ==========================================
-// FILTER HAPPY MOMENTS DAN BERDUA TERPISAH
-// ==========================================
+/* ==========================================
+   PHOTO INTERACTION
+========================================== */
 
 function setupPhotoMemories(galleries, allImages) {
   const lightboxImages = [...allImages];
 
   galleries.forEach((gallery, galleryIndex) => {
     let currentFilter = "all";
-
-    // Set favorit terpisah untuk masing-masing gallery
     const likedImages = new Set();
 
     const tools = document.createElement("div");
@@ -442,17 +450,11 @@ function setupPhotoMemories(galleries, allImages) {
       const card = document.createElement("div");
 
       card.className = "memory-card";
-
-      // ID unik hanya untuk gallery ini
       card.dataset.galleryIndex = galleryIndex;
       card.dataset.imageIndex = index;
 
       img.parentNode.insertBefore(card, img);
       card.appendChild(img);
-
-      // ==========================================
-      // FAVORITE BUTTON
-      // ==========================================
 
       const favorite = document.createElement("button");
 
@@ -468,39 +470,33 @@ function setupPhotoMemories(galleries, allImages) {
 
         if (likedImages.has(index)) {
           likedImages.delete(index);
-
           favorite.classList.remove("active");
           favorite.textContent = "♡";
           card.classList.remove("is-liked");
         } else {
           likedImages.add(index);
-
           favorite.classList.add("active");
           favorite.textContent = "♥";
           card.classList.add("is-liked");
         }
 
-        // Hanya gallery yang sedang digunakan yang diperbarui
         updateSingleGalleryFilter(gallery, likedImages, currentFilter);
       });
 
       card.appendChild(favorite);
 
-      // ==========================================
-      // IMAGE CLICK / LIGHTBOX
-      // ==========================================
-
       img.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
 
-        openInteractiveLightbox(lightboxImages, lightboxImages.indexOf(img));
+        if (typeof window.openInteractiveLightbox === "function") {
+          window.openInteractiveLightbox(
+            lightboxImages,
+            lightboxImages.indexOf(img),
+          );
+        }
       });
     });
-
-    // ==========================================
-    // FILTER BUTTONS
-    // ==========================================
 
     tools.querySelectorAll("[data-filter]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -512,21 +508,15 @@ function setupPhotoMemories(galleries, allImages) {
 
         button.classList.add("active");
 
-        // Hanya filter gallery ini
         updateSingleGalleryFilter(gallery, likedImages, currentFilter);
       });
     });
 
-    // Inisialisasi gallery masing-masing
     updateSingleGalleryFilter(gallery, likedImages, "all");
   });
 
   setupLightboxNavigation(lightboxImages);
 }
-
-// ==========================================
-// UPDATE FILTER SATU GALLERY SAJA
-// ==========================================
 
 function updateSingleGalleryFilter(gallery, likedImages, filter) {
   const cards = [...gallery.querySelectorAll(".memory-card")];
@@ -548,13 +538,12 @@ function updateSingleGalleryFilter(gallery, likedImages, filter) {
   });
 
   const tools = gallery.previousElementSibling;
-  const counter = tools?.querySelector(".memory-counter");
+  const counter = tools ? tools.querySelector(".memory-counter") : null;
 
   if (counter) {
     counter.textContent = `${visible} foto ditampilkan`;
   }
 
-  // Pesan jika tidak ada foto favorit
   let emptyMessage = gallery.parentNode.querySelector(".memory-empty-message");
 
   if (visible === 0 && filter === "liked") {
@@ -572,11 +561,9 @@ function updateSingleGalleryFilter(gallery, likedImages, filter) {
   }
 }
 
-// ==========================================
-// LIGHTBOX NAVIGATION
-// ==========================================
-
-let lightboxInitialized = false;
+/* ==========================================
+   LIGHTBOX NAVIGATION
+========================================== */
 
 function setupLightboxNavigation(allImages) {
   const lightbox = document.getElementById("lightbox");
@@ -589,28 +576,24 @@ function setupLightboxNavigation(allImages) {
   lightboxInitialized = true;
 
   const previous = document.createElement("button");
-
   previous.type = "button";
   previous.className = "lightbox-nav lightbox-prev";
   previous.setAttribute("aria-label", "Foto sebelumnya");
   previous.textContent = "‹";
 
   const next = document.createElement("button");
-
   next.type = "button";
   next.className = "lightbox-nav lightbox-next";
   next.setAttribute("aria-label", "Foto berikutnya");
   next.textContent = "›";
 
   const closeButton = document.createElement("button");
-
   closeButton.type = "button";
   closeButton.className = "lightbox-close";
   closeButton.setAttribute("aria-label", "Tutup foto");
   closeButton.textContent = "×";
 
   const caption = document.createElement("div");
-
   caption.className = "lightbox-caption";
 
   lightbox.appendChild(previous);
@@ -621,34 +604,31 @@ function setupLightboxNavigation(allImages) {
   let activeIndex = 0;
 
   function showImage(index) {
-    if (!allImages.length) return;
+    if (!allImages.length) {
+      return;
+    }
 
     activeIndex = (index + allImages.length) % allImages.length;
 
     big.src = allImages[activeIndex].src;
-
     caption.textContent = `Foto ${activeIndex + 1} dari ${allImages.length}`;
 
     lightbox.hidden = false;
-
     document.body.classList.add("lightbox-open");
   }
 
   previous.addEventListener("click", (event) => {
     event.stopPropagation();
-
     showImage(activeIndex - 1);
   });
 
   next.addEventListener("click", (event) => {
     event.stopPropagation();
-
     showImage(activeIndex + 1);
   });
 
   closeButton.addEventListener("click", (event) => {
     event.stopPropagation();
-
     closeLightbox();
   });
 
@@ -663,7 +643,9 @@ function setupLightboxNavigation(allImages) {
   });
 
   document.addEventListener("keydown", (event) => {
-    if (lightbox.hidden) return;
+    if (lightbox.hidden) {
+      return;
+    }
 
     if (event.key === "ArrowLeft") {
       showImage(activeIndex - 1);
@@ -686,14 +668,16 @@ function setupLightboxNavigation(allImages) {
   window.openInteractiveLightbox = showImage;
 }
 
-// ==========================================
-// INTERACTIVE VIDEO MEMORIES
-// ==========================================
+/* ==========================================
+   VIDEO MEMORIES
+========================================== */
 
 function setupVideoMemories(allVideos) {
   const videoGroups = [...document.querySelectorAll(".videos")];
 
-  if (!videoGroups.length) return;
+  if (!videoGroups.length) {
+    return;
+  }
 
   const videoTools = document.createElement("div");
 
@@ -718,13 +702,12 @@ function setupVideoMemories(allVideos) {
   `;
 
   const videoSection = document.getElementById("video");
+  const firstVideoGroup = videoSection
+    ? videoSection.querySelector(".videos")
+    : null;
 
-  if (videoSection) {
-    const firstVideoGroup = videoSection.querySelector(".videos");
-
-    if (firstVideoGroup) {
-      firstVideoGroup.parentNode.insertBefore(videoTools, firstVideoGroup);
-    }
+  if (firstVideoGroup) {
+    firstVideoGroup.parentNode.insertBefore(videoTools, firstVideoGroup);
   }
 
   const statusText = videoTools.querySelector(".video-status");
@@ -764,30 +747,21 @@ function setupVideoMemories(allVideos) {
     video.addEventListener("error", () => {
       video.classList.add("video-error");
 
-      statusText.textContent = `Video ${
-        index + 1
-      } tidak dapat diputar. Periksa format atau file videonya.`;
+      statusText.textContent = `Video ${index + 1} tidak dapat diputar.`;
     });
 
     const wrapper = document.createElement("div");
-
     wrapper.className = "video-wrapper";
 
     video.parentNode.insertBefore(wrapper, video);
-
     wrapper.appendChild(video);
 
     const label = document.createElement("span");
-
     label.className = "video-number";
     label.textContent = `Video ${index + 1}`;
 
     wrapper.appendChild(label);
   });
-
-  // ==========================================
-  // PAUSE ALL VIDEOS
-  // ==========================================
 
   const pauseAllButton = videoTools.querySelector("#pauseAllVideos");
 
@@ -801,10 +775,6 @@ function setupVideoMemories(allVideos) {
       "Semua video dijeda. Mau lanjut nonton yang mana? 🎀";
   });
 
-  // ==========================================
-  // RESTART ALL VIDEOS
-  // ==========================================
-
   const restartButton = videoTools.querySelector("#restartVideos");
 
   restartButton?.addEventListener("click", () => {
@@ -816,10 +786,6 @@ function setupVideoMemories(allVideos) {
 
     statusText.textContent = "Semua video dikembalikan ke awal 🔁";
   });
-
-  // ==========================================
-  // MUTE / UNMUTE ALL VIDEOS
-  // ==========================================
 
   const muteButton = videoTools.querySelector("#muteAllVideos");
 
@@ -840,9 +806,9 @@ function setupVideoMemories(allVideos) {
   });
 }
 
-// ==========================================
-// CREATE HEART EFFECT
-// ==========================================
+/* ==========================================
+   FLOATING HEART EFFECT
+========================================== */
 
 function makeHeart() {
   const heart = document.createElement("div");
@@ -864,14 +830,17 @@ function makeHeart() {
   }, 6000);
 }
 
-// ==========================================
-// ESC KEY FOR MODALS
-// ==========================================
+/* ==========================================
+   ESC KEY FOR MODALS
+========================================== */
 
 document.addEventListener("keydown", (event) => {
-  if (event.key !== "Escape") return;
+  if (event.key !== "Escape") {
+    return;
+  }
 
   const birthdayModal = document.getElementById("birthdayModal");
+
   const whatsappWarning = document.getElementById("whatsappWarning");
 
   if (birthdayModal && birthdayModal.classList.contains("show")) {
@@ -881,119 +850,4 @@ document.addEventListener("keydown", (event) => {
   if (whatsappWarning && whatsappWarning.classList.contains("show")) {
     closeWhatsAppWarning();
   }
-});
-// ==========================================
-// BIRTHDAY COUNTDOWN
-// TARGET: 24 SEPTEMBER 2026 - 00:00 WIB
-// ==========================================
-
-/* =========================================================
-   BIRTHDAY COUNTDOWN
-========================================================= */
-
-function initializeBirthdayCountdown() {
-  const countdownScreen = document.getElementById("countdownScreen");
-
-  const birthdayFormCard = document.getElementById("birthdayFormCard");
-
-  const birthdayGate = document.getElementById("birthdayGate");
-
-  const app = document.getElementById("app");
-
-  const welcome = document.getElementById("welcome");
-
-  const daysElement = document.getElementById("countdownDays");
-
-  const hoursElement = document.getElementById("countdownHours");
-
-  const minutesElement = document.getElementById("countdownMinutes");
-
-  const secondsElement = document.getElementById("countdownSeconds");
-
-  if (
-    !countdownScreen ||
-    !birthdayFormCard ||
-    !birthdayGate ||
-    !app ||
-    !welcome ||
-    !daysElement ||
-    !hoursElement ||
-    !minutesElement ||
-    !secondsElement
-  ) {
-    console.error("Elemen countdown tidak ditemukan.");
-
-    return;
-  }
-
-  /*
-       24 September 2026 pukul 00.00 WIB
-       WIB = UTC+7
-       UTC = 23 September 2026 pukul 17.00
-    */
-  const targetDate = new Date("2026-09-23T17:00:00.000Z").getTime();
-
-  let countdownInterval = null;
-
-  function showCountdown() {
-    countdownScreen.hidden = false;
-    birthdayFormCard.hidden = true;
-
-    welcome.hidden = false;
-    app.hidden = true;
-  }
-
-  function showBirthdayForm() {
-    countdownScreen.hidden = true;
-    birthdayFormCard.hidden = false;
-
-    welcome.hidden = false;
-    app.hidden = true;
-  }
-
-  function updateCountdown() {
-    const currentTime = Date.now();
-
-    const difference = targetDate - currentTime;
-
-    if (difference <= 0) {
-      showBirthdayForm();
-
-      if (countdownInterval !== null) {
-        clearInterval(countdownInterval);
-        countdownInterval = null;
-      }
-
-      return;
-    }
-
-    showCountdown();
-
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-
-    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-
-    const minutes = Math.floor((difference / (1000 * 60)) % 60);
-
-    const seconds = Math.floor((difference / 1000) % 60);
-
-    daysElement.textContent = String(days).padStart(2, "0");
-
-    hoursElement.textContent = String(hours).padStart(2, "0");
-
-    minutesElement.textContent = String(minutes).padStart(2, "0");
-
-    secondsElement.textContent = String(seconds).padStart(2, "0");
-  }
-
-  // Jalankan langsung saat halaman dibuka
-  updateCountdown();
-
-  // Jalankan setiap detik
-  countdownInterval = setInterval(updateCountdown, 1000);
-}
-
-/* Jalankan setelah seluruh HTML selesai dimuat */
-document.addEventListener("DOMContentLoaded", function () {
-  initializeBirthdayCountdown();
 });
